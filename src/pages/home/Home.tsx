@@ -1,82 +1,48 @@
+import blogpessoal from "../../assets/img/blogpessoalimg.png";
+import { motion } from "framer-motion";
+
 export default function Home() {
     return (
         <section
-            style={{
-                backgroundColor: '#312e81',
-                display: 'flex',
-                justifyContent: 'center'
-            }}>
+            className="bg-pink-400 flex justify-center items-center">
             <article
-                style={{ 
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: '2rem',
-                    color: 'white',
-                    width: '100%',
-                    maxWidth: '1280px'
-                }}>
+                className="container grid grid-cols-2 text-white">
+
+                {/* py - padding vertical px padding horizontal pb - padding bottom pt - padding top */}
                 <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: '1rem',
-                        paddingTop: '1rem',
-                        paddingBottom: '1rem'                    
-                    }}>
+                    className="flex flex-col justify-center items-center gap-4 py-4">
+
                     <h2
-                        style={{
-                            fontSize: '3rem',
-                            fontWeight: 'bold'
-                        }}>
-                            Seja Bem-Vinda(o)!
+                        className="font-serif text-4xl font-bold">
+                        Seja Bem-Vinda(o)!
                     </h2>
                     <p
-                        style={{
-                            fontSize: '1.25rem'
-                        }}>
-                            Esse é o Blog Pessoal, onde você pode compartilhar 
-                            suas ideias, pensamentos e experiências com o mundo. 
-                            Aqui, você pode criar e publicar seus próprios posts, 
-                            interagir com outros usuários e explorar uma variedade 
-                            de conteúdos interessantes. 
-                            Seja para expressar sua criatividade, compartilhar 
-                            conhecimento ou simplesmente se conectar com outras 
-                            pessoas, o Blog Pessoal é o lugar perfeito para você. 
-                            Junte-se a nós e comece a compartilhar suas histórias 
-                            hoje mesmo!
+                        className="text-xl text-center">
+                        Esse é o Blog da Brina, onde você pode compartilhar
+                        suas ideias, pensamentos e experiências com o mundo.
+                        Aqui, você pode criar e publicar seus próprios posts.
+                        O Blog da Brina é o lugar perfeito para você.
+                        Junte-se a nós e comece a compartilhar suas histórias!
                     </p>
 
                     <div
-                        style={{
-                            display:'flex',
-                            justifyContent: 'space-around',
-                            gap: '1rem'
-                        }}>
+                        className="flex justify-around gap-4">
+
                         <div
-                            style={{
-                                borderRadius: '1rem',
-                                color: 'white',
-                                border: '2px, solid, white',
-                                padding: '0.5rem 1rem'
-                            }}>
-                                Nova Postagem
+                            className="rounded border-white border-solid border-2 py-2 px-4 cursor-pointer">
+                            Nova Postagem
                         </div>
                     </div>
                 </div>
 
                 <figure
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'center'
-                    }}>
-                        <img src="https://i.imgur.com/fyfri1v.png" 
-                        alt="Imagem Página Home" 
-                        style={{ 
-                            width: '60%',
-                            borderRadius: '1rem'
-                        }}/>
+                    className="flex justify-center">
+                    <motion.img
+                        src={blogpessoal}
+                        animate={{ y: [0, -10, 0] }}
+                        transition={{ duration: 3, repeat: Infinity }}
+                        alt="Imagem Página Home"
+                        className="w-2/3"/>
                 </figure>
             </article>
         </section>
