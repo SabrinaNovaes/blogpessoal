@@ -15,7 +15,7 @@ function Navbar() {
     }
 
     return (
-        <div className="fixed top-0 w-full z-50 px-4 mt-3">
+        <div className="fixed w-full z-50 px-4 mt-3">
             <div className="flex items-center text-center justify-between max-w-6xl mx-auto px-6 py-3
                 rounded-2xl bg-white/10 backdrop-blur-lg border border-white/10 shadow-sm shadow-pink-300">
 
@@ -31,7 +31,7 @@ function Navbar() {
                         hover:drop-shadow-lg hover:drop-shadow-pink-300">Postagens</Link>
                     <Link to="/temas" className="text-xl hover:text-pink-400 hover:border-pink-400 
                         hover:drop-shadow-lg hover:drop-shadow-pink-300">Temas</Link>
-                    <Link to="/cadastrarTemas" className="text-xl hover:text-pink-400 hover:border-pink-400 
+                    <Link to="/cadastrartema" className="text-xl hover:text-pink-400 hover:border-pink-400 
                         hover:drop-shadow-lg hover:drop-shadow-pink-300">Novo Tema</Link>
                     <Link to="/login" className="text-xl flex items-center gap-2 hover:text-pink-400 hover:border-pink-400 
                         hover:drop-shadow-lg hover:drop-shadow-pink-300">

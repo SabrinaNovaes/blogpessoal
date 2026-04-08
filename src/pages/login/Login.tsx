@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import type UsuarioLogin from "../../models/UsuarioLogin";
 import { AuthContext } from "../../contexts/AuthContext";
 import { ClipLoader } from "react-spinners";
+import loginblog from "../../assets/img/loginblog.png"
 
 
 function Login() {
@@ -40,7 +41,7 @@ function Login() {
 
     return (
         <>
-            <div className="grid grid-cols-1 lg:grid-cols-2 h-screen place-items-center bg-[#0F172A]">
+            <div className="h-screen grid grid-cols-1 lg:grid-cols-2 place-items-center bg-[#0F172A]">
                 <form className="flex justify-center items-center flex-col w-1/2 gap-4 text-pink-100"
                     onSubmit={login}
                 >
@@ -94,8 +95,9 @@ function Login() {
                     <p>Ainda não tem uma conta?{' '}<Link to="/cadastro" className="text-pink-500 hover:underline">
                     Cadastre-se</Link></p>
                 </form>
-                <div className="bg-[url('https://i.imgur.com/ZZFAmzo.jpg')] lg:block hidden bg-no-repeat 
-                    w-full min-h-screen bg-cover bg-center">
+                <div className="lg:block hidden bg-no-repeat 
+                    w-full min-h-screen bg-cover bg-center"
+                    style={{ backgroundImage: `url(${loginblog})` }}>
                 </div>
             </div>
         </>

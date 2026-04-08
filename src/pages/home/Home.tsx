@@ -7,7 +7,7 @@ export default function Home() {
         <section
             className="bg-[#0F172A] flex justify-center items-center">
             <article
-                className="container grid grid-cols-1 md:grid-cols-2 text-pink-100 mt-25">
+                className="container grid grid-cols-1 md:grid-cols-2 text-pink-100 mt-30">
 
                 {/* py - padding vertical px padding horizontal pb - padding bottom pt - padding top */}
 
@@ -23,7 +23,7 @@ export default function Home() {
 
                 <div
                     className="flex flex-col gap-4 items-center justify-center py-4 text-center md:text-left order-last md:order-first">
-                    <h2 className="font-serif text-3xl md:text-7xl font-bold leading-tight mx-auto px-4 
+                    <h2 className="font-serif text-5xl md:text-6xl font-bold leading-tight mx-auto px-4 
                         bg-linear-to-t from-pink-300 to-pink-500 bg-clip-text text-transparent">
                         Seja Bem-Vinda(o)!
                     </h2>
