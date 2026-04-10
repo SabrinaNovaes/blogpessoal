@@ -27,7 +27,7 @@ function Navbar() {
                 <div className="flex items-center gap-6 text-pink-100">
                     <Link to="/home" className="text-xl hover:text-pink-400 hover:border-pink-400 
                         hover:drop-shadow-lg hover:drop-shadow-pink-300">Home</Link>
-                    <Link to="/home" className="text-xl hover:text-pink-400 hover:border-pink-400 
+                    <Link to="/postagens" className="text-xl hover:text-pink-400 hover:border-pink-400 
                         hover:drop-shadow-lg hover:drop-shadow-pink-300">Postagens</Link>
                     <Link to="/temas" className="text-xl hover:text-pink-400 hover:border-pink-400 
                         hover:drop-shadow-lg hover:drop-shadow-pink-300">Temas</Link>
@@ -35,7 +35,7 @@ function Navbar() {
                         hover:drop-shadow-lg hover:drop-shadow-pink-300">Novo Tema</Link>
                     <Link to="/login" className="text-xl flex items-center gap-2 hover:text-pink-400 hover:border-pink-400 
                         hover:drop-shadow-lg hover:drop-shadow-pink-300">
-                        <PiUserCircleDuotone size={30} />Login
+                        <PiUserCircleDuotone size={30} />Perfil
                     </Link>
                     <Link to="" onClick={logout} className="text-xl flex items-center gap-2 hover:text-pink-400 hover:border-pink-400 
                         hover:drop-shadow-lg hover:drop-shadow-pink-300">

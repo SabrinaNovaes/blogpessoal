@@ -58,10 +58,10 @@ function ListaTemas() {
 
     return (
         <>
-            <section className="bg-[#0F172A] text-pink-100 pt-40 h-[200vh]">
+            <section className="bg-[#0F172A] text-pink-100 h-[200vh]">
                 {
                     isLoading && (
-                        <div className="flex justify-center w-full pt-55 ">
+                        <div className="flex justify-center w-full pt-40 ">
                             <SyncLoader
                                 color="#FF6F91"
                                 size={32}

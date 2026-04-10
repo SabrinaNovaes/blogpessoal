@@ -8,6 +8,8 @@ import { AuthProvider } from "./contexts/AuthContext"
 import DeletarTema from "./components/tema/deletartema/DeletarTema"
 import FormTema from "./components/tema/formtema/FormTema"
 import ListaTemas from "./components/tema/listartema/ListarTema"
+import ListaPostagens from "./components/postagem/listapostagem/ListaPostagem"
+import FormPostagem from "./components/postagem/formpostagem/FormPostagem"
 
 
 function App() {
@@ -17,11 +19,14 @@ function App() {
       <AuthProvider>
         <BrowserRouter>
           <Navbar />
-          <div className="min-h-[80vh] bg-[#0F172A]">
+          <div className="min-h-[200vh] bg-[#0F172A] pt-40">
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/home" element={<Home /> } />
               <Route path="/cadastro" element={<Cadastro />} />
+              <Route path="/postagens" element={<ListaPostagens />} />
+              <Route path="/cadastrarpostagem" element={<FormPostagem />} />
+              <Route path="/editarpostagem/:id" element={<FormPostagem />} />
               <Route path="/temas" element={<ListaTemas />} />
 							<Route path="/cadastrartema" element={<FormTema />} />
 							<Route path="/editartema/:id" element={<FormTema />} />

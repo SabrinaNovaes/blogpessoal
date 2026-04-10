@@ -7,7 +7,7 @@ function Footer() {
 
     return (
         <>
-            <footer className="fixed bottom-0 w-full bg-[#0F172A] text-pink-100">
+            <footer className="fixed bottom-0 w-full text-pink-100">
                 <div className="flex flex-col justify-center items-center bg-white/10 backdrop-blur-lg border border-white/10 shadow-sm shadow-pink-300">
                     <p className="md:text-base">Dev Diaries | © Copyright {data} </p>
                     <p className="text-sm">Conecte-se Comigo nas Redes Sociais!</p>

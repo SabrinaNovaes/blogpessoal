@@ -128,7 +128,7 @@ function FormTema() {
 
     return (
         <div className="container flex flex-col items-center justify-center mx-auto">
-            <h1 className="text-4xl text-center pt-35 my-8 text-pink-500">
+            <h1 className="text-4xl text-center my-8 text-pink-500">
                 {id === undefined ? "Cadastrar" : "Editar"} Tema
             </h1>
 
@@ -141,7 +141,7 @@ function FormTema() {
                         type="text"
                         placeholder="Descreva aqui seu tema"
                         name='descricao'
-                        className="border-2 border-pink-600 rounded-lg p-2"
+                        className="border-2 border-pink-600 hover:border-pink-400 rounded-lg p-2"
                         value={tema.descricao}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />

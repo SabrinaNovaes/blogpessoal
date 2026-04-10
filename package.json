@@ -1,6 +1,6 @@
 {
   "name": "blogpessoal",
-  "private": true, 
+  "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -18,8 +18,10 @@
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-icons": "^5.6.0",
+    "react-intl": "^10.1.1",
     "react-router-dom": "^7.13.2",
     "react-spinners": "^0.17.0",
+    "reactjs-popup": "^2.0.6",
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
