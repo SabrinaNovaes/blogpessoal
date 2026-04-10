@@ -1,24 +1,50 @@
 import { GithubLogoIcon, LinkedinLogoIcon } from "@phosphor-icons/react"
+import { useContext, type ReactNode } from "react"
 import { Link } from "react-router-dom"
+import { AuthContext } from "../../contexts/AuthContext"
 
 function Footer() {
 
     const data = new Date().getFullYear()
 
-    return (
-        <>
-            <footer className="fixed bottom-0 w-full text-pink-100">
-                <div className="flex flex-col justify-center items-center bg-white/10 backdrop-blur-lg border border-white/10 shadow-sm shadow-pink-300">
-                    <p className="md:text-base">Dev Diaries | © Copyright {data} </p>
-                    <p className="text-sm">Conecte-se Comigo nas Redes Sociais!</p>
-                    <div className="flex pt-2 gap-4">
-                        <Link to="" className=" hover:text-pink-400 hover:border-pink-400 
-                        hover:drop-shadow-lg hover:drop-shadow-pink-300"><LinkedinLogoIcon size={32} /></Link>
-                        <Link to="" className=" hover:text-pink-400 hover:border-pink-400 
-                        hover:drop-shadow-lg hover:drop-shadow-pink-300"><GithubLogoIcon size={32} /></Link>
+    const { usuario } = useContext(AuthContext)
+
+    let component: ReactNode
+
+    if (usuario.token !== "") {
+        component = (
+            <footer className="w-full text-pink-100 pt-10 bg-[#0F172A]">
+                <div className="flex flex-col justify-center items-center 
+                border-t border-white/10 py-6 gap-2">
+                    <p className="text-sm md:text-base text-gray-400">
+                        Dev Diaries | © {data}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                        Conecte-se comigo nas redes sociais!
+                    </p>
+                    <div className="flex pt-2 gap-5">
+                        <Link
+                            to="" className="hover:text-pink-400 transition duration-300
+                            hover:scale-110 hover:drop-shadow-lg 
+                            hover:drop-shadow-pink-400">
+                            <LinkedinLogoIcon size={28} />
+                        </Link>
+
+                        <Link
+                            to="" className="hover:text-pink-400 transition duration-300
+                                hover:scale-110 hover:drop-shadow-lg 
+                                hover:drop-shadow-pink-400">
+                            <GithubLogoIcon size={28} />
+                        </Link>
                     </div>
                 </div>
             </footer>
+        )
+    }
+
+    return (
+        <>
+            {component}
         </>
     )
 }

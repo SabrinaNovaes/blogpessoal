@@ -1,43 +1,66 @@
 import { Link } from 'react-router-dom'
 import type Postagem from '../../../models/Postagem'
+import { BsPencil } from 'react-icons/bs'
+import { FaTrash } from 'react-icons/fa'
 
 interface CardPostagemProps {
     postagem: Postagem
 }
 
 function CardPostagem({ postagem }: CardPostagemProps) {
+
     return (
-        <div className='border-pink-400 border 
-            flex flex-col rounded-lg overflow-hidden justify-between'>
-                
-            <div className="">
-                <div className="flex w-full bg-pink-600 py-2 px-4 items-center gap-4">
-                    <img src={postagem.usuario?.foto}
-                        className='h-12 rounded-full' alt={postagem.usuario?.nome} />
-                    <h3 className='text-lg font-bold text-center uppercase'>
+        <div className="bg-[#1E293B] rounded-2xl overflow-hidden shadow-md hover:shadow-pink-500/10 transition">
+
+            <div className="flex items-center gap-3 px-4 py-3 border-b border-white/10">
+                <img
+                    src={postagem.usuario?.foto}
+                    className="h-10 w-10 rounded-full object-cover"
+                    alt={postagem.usuario?.nome}
+                />
+
+                <div className="flex flex-col">
+                    <h3 className="text-sm font-semibold text-white">
                         {postagem.usuario?.nome}
                     </h3>
-                </div>
-                <div className='p-4 bg-[#0F172A] text-pink-100'>
-                    <h4 className='text-lg font-semibold uppercase text-pink-500'>{postagem.titulo}</h4>
-                    <p>{postagem.texto}</p>
-                    <p>Tema: {postagem.tema?.descricao}</p>
-                    <p>{new Intl.DateTimeFormat("pt-BR", {
-                        dateStyle: 'full',
-                        timeStyle: 'medium',
-                    }).format(new Date(postagem.data))}</p>
+                    <span className="text-xs text-gray-400">
+                        {new Intl.DateTimeFormat("pt-BR", {
+                            dateStyle: "medium",
+                            timeStyle: "short",
+                        }).format(new Date(postagem.data))}
+                    </span>
                 </div>
             </div>
-            <div className="flex">
-                <Link to={`/editarpostagem/${postagem.id}`} className='w-full text-white bg-[#0F172A] border 
-                    border-pink-400 hover:bg-pink-600 flex items-center justify-center py-2'>
-                    <button>Editar</button>
-                </Link>
-                <Link to='' className='text-white bg-[#0F172A] border border-pink-400
-                    hover:bg-red-700 w-full flex items-center justify-center'>
-                    <button>Deletar</button>
-                </Link>
+
+            <div className="p-4 text-pink-100">
+                <h4 className="text-lg font-bold text-pink-400 mb-2">
+                    {postagem.titulo}
+                </h4>
+
+                <p className="text-gray-300 mb-3">
+                    {postagem.texto}
+                </p>
+
+                <span className="text-xs text-pink-300 bg-pink-500/10 px-2 py-1 rounded-full">
+                    #{postagem.tema?.descricao}
+                </span>
             </div>
+
+            <div className="flex justify-end items-center px-4 py-3 border-t border-white/10 text-sm">
+            
+                <div className="flex gap-3">
+                    <Link to={`/editarpostagem/${postagem.id}`} className="hover:text-yellow-400
+                    text-pink-300">
+                        <BsPencil size={20} />
+                    </Link>
+
+                    <Link to="" className="hover:text-red-500 text-pink-300">
+                        <FaTrash size={20} />
+                    </Link>
+                </div>
+
+            </div>
+
         </div>
     )
 }

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import type Usuario from "../../models/Usuario";
 import { cadastrarUsuario } from "../../services/Service";
 import { ClipLoader } from "react-spinners";
+import { motion } from "framer-motion";
+import { ToastAlerta } from "../../util/ToastAlerta";
 
 function Cadastro() {
 
@@ -50,15 +52,15 @@ function Cadastro() {
 
                 await cadastrarUsuario('/usuarios/cadastrar', usuario, setUsuario);
 
-                alert('Usuário Cadastrado com sucesso!');
+                ToastAlerta('Usuário Cadastrado com sucesso!', 'sucesso');
 
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
             } catch (error) {
-                alert('Erro ao cadastrar o usuário!');
+                ToastAlerta('Erro ao cadastrar o usuário!', 'erro');
             }
 
         } else {
-            alert('Dados do usuário estão inconsistentes!');
+            ToastAlerta('Dados do usuário estão inconsistentes!', 'erro');
             setUsuario({
                 ...usuario,
                 senha: ''
@@ -86,76 +88,131 @@ function Cadastro() {
 
     return (
         <>
-            <div className="grid grid-cols-1 lg:grid-cols-2 h-screen 
-            place-items-center font-bold bg-[#0F172A]">
-                <div
-                    className="bg-[url('https://i.imgur.com/ZZFAmzo.jpg')] lg:block hidden bg-no-repeat 
-                    w-full min-h-screen bg-cover bg-center"
-                ></div>
-                <form className='flex justify-center items-center text-pink-100 mt-25 flex-col w-2/3 gap-3'
-                    onSubmit={cadastrarNovoUsuario}>
-                    <h2 className='bg-linear-to-t from-pink-300 to-pink-500 bg-clip-text text-transparent 
-                        font-serif font-bold text-5xl leading-tight'>Cadastrar</h2>
-                    <div className="flex flex-col w-full">
-                        <label htmlFor="nome">Nome</label>
-                        <input
-                            type="text"
-                            id="nome"
-                            name="nome"
-                            placeholder="Nome"
-                            className="border-2 border-pink-400 rounded-lg h-10 p-2 hover:border-pink-300
-                            hover:shadow-sm shadow-pink-300"
-                            value={usuario.nome}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-                        />
-                    </div>
-                    <div className="flex flex-col w-full">
-                        <label htmlFor="usuario">Usuario</label>
-                        <input
-                            type="text"
-                            id="usuario"
-                            name="usuario"
-                            placeholder="Usuario"
-                            className="border-2 border-pink-400 rounded-lg h-10 p-2 hover:border-pink-300
-                            hover:shadow-sm shadow-pink-300"
-                            value={usuario.usuario}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-                        />
-                    </div>
-                    <div className="flex flex-col w-full">
-                        <label htmlFor="foto">Foto</label>
-                        <input
-                            type="text"
-                            id="foto"
-                            name="foto"
-                            placeholder="Foto"
-                            className="border-2 border-pink-400 rounded-lg h-10 p-2 hover:border-pink-300
-                            hover:shadow-sm shadow-pink-300"
-                            value={usuario.foto}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-                        />
-                    </div>
-                    <div className="flex flex-col w-full">
-                        <label htmlFor="senha">Senha</label>
-                        <input type="password" id="senha" name="senha" placeholder="Senha"
-                            className="border-2 border-pink-400 rounded-lg h-10 p-2 hover:border-pink-300
-                            hover:shadow-sm shadow-pink-300" value={usuario.senha} onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)} />
-                    </div>
-                    <div className="flex flex-col w-full">
-                        <label htmlFor="confirmarSenha">Confirmar Senha</label>
-                        <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Confirmar Senha"
-                            className="border-2 border-pink-400 rounded-lg h-10 p-2 hover:border-pink-300
-                            hover:shadow-sm shadow-pink-300" value={confirmarSenha} onChange={(e: ChangeEvent<HTMLInputElement>) => handleConfirmarSenha(e)} />
-                    </div>
-                    <div className="flex justify-around w-full gap-8">
-                        <button type='reset' className='rounded-lg text-pink-100 cursor-pointer bg-red-500 hover:bg-red-700 w-1/2 py-2'
-                            onClick={retornar}>Cancelar</button>
+            <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen bg-[#0F172A]">
 
-                        <button type='submit' className="rounded-lg bg-pink-600 hover:bg-pink-800  text-pink-100
-                                border-pink-900 border-solid border cursor-pointer w-1/2 py-2 flex justify-center">
-                            {isLoading ? <ClipLoader color="#ffffff" size={24} /> : <span>Cadastrar</span>}</button>
-                    </div>
-                </form>
+                <div
+                    className="hidden lg:block bg-cover bg-center"
+                    style={{ backgroundImage: "url('https://i.imgur.com/ZZFAmzo.jpg')" }}
+                />
+
+                <div className="flex justify-center items-center px-6">
+
+                    <motion.form
+                        onSubmit={cadastrarNovoUsuario}
+
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+
+                        className="w-full max-w-md flex flex-col gap-4 
+                            bg-white/5 backdrop-blur-lg border border-white/10 
+                            rounded-2xl p-6 shadow-md text-pink-100"
+                    >
+
+                        <h2 className="text-4xl text-center font-bold 
+                            bg-linear-to-t from-pink-300 to-pink-500 
+                            bg-clip-text text-transparent">
+                            Cadastrar
+                        </h2>
+
+                        <div className="flex flex-col gap-1">
+                            <label className="text-sm text-gray-400">Nome</label>
+                            <input
+                                type="text"
+                                name="nome"
+                                value={usuario.nome}
+                                onChange={atualizarEstado}
+                                placeholder="Digite seu nome"
+                                className="border border-pink-400 rounded-lg px-2 py-2 
+                                    bg-transparent text-pink-100 outline-none
+                                    focus:border-pink-500 focus:shadow-[0_0_10px_rgba(255,111,145,0.3)]"
+                            />
+                        </div>
+
+                        <div className="flex flex-col gap-1">
+                            <label className="text-sm text-gray-400">Usuário</label>
+                            <input
+                                type="text"
+                                name="usuario"
+                                value={usuario.usuario}
+                                onChange={atualizarEstado}
+                                placeholder="Digite seu usuário"
+                                className="border border-pink-400 rounded-lg px-2 py-2 
+                                    bg-transparent text-pink-100 outline-none
+                                    focus:border-pink-500 focus:shadow-[0_0_10px_rgba(255,111,145,0.3)]"
+                            />
+                        </div>
+
+                        <div className="flex flex-col gap-1">
+                            <label className="text-sm text-gray-400">Foto</label>
+                            <input
+                                type="text"
+                                name="foto"
+                                value={usuario.foto}
+                                onChange={atualizarEstado}
+                                placeholder="URL da sua foto"
+                                className="border border-pink-400 rounded-lg px-2 py-2 
+                                    bg-transparent text-pink-100 outline-none
+                                    focus:border-pink-500 focus:shadow-[0_0_10px_rgba(255,111,145,0.3)]"
+                            />
+                        </div>
+
+                        <div className="flex flex-col gap-1">
+                            <label className="text-sm text-gray-400">Senha</label>
+                            <input
+                                type="password"
+                                name="senha"
+                                value={usuario.senha}
+                                onChange={atualizarEstado}
+                                placeholder="Digite sua senha"
+                                className="border border-pink-400 rounded-lg px-2 py-2 
+                                    bg-transparent text-pink-100 outline-none
+                                    focus:border-pink-500 focus:shadow-[0_0_10px_rgba(255,111,145,0.3)]"
+                            />
+                        </div>
+
+                        <div className="flex flex-col gap-1">
+                            <label className="text-sm text-gray-400">Confirmar Senha</label>
+                            <input
+                                type="password"
+                                value={confirmarSenha}
+                                onChange={handleConfirmarSenha}
+                                placeholder="Confirme sua senha"
+                                className="border border-pink-400 rounded-lg px-2 py-2 
+                                    bg-transparent text-pink-100 outline-none
+                                    focus:border-pink-500 focus:shadow-[0_0_10px_rgba(255,111,145,0.3)]"
+                            />
+                        </div>
+
+                        <div className="flex gap-4 mt-2">
+
+                            <button
+                                type="button"
+                                onClick={retornar}
+                                className="w-1/2 py-2 rounded-lg bg-red-500 hover:bg-red-600 transition"
+                            >
+                                Cancelar
+                            </button>
+
+                            <motion.button
+                                type="submit"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+
+                                className="w-1/2 py-2 rounded-lg 
+                                    bg-linear-to-r from-pink-500 to-pink-400 
+                                    hover:from-pink-400 hover:to-pink-500 
+                                    text-white font-semibold flex justify-center items-center"
+                            >
+                                {isLoading ? (
+                                    <ClipLoader color="#fff" size={20} />
+                                ) : (
+                                    "Cadastrar"
+                                )}
+                            </motion.button>
+                        </div>
+                    </motion.form>
+                </div>
             </div>
         </>
     )

@@ -5,6 +5,8 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import type Tema from "../../../models/Tema";
 import { atualizar, buscar, cadastrar } from "../../../services/Service";
 import { ClipLoader } from "react-spinners";
+import { motion } from "framer-motion";
+import { ToastAlerta } from "../../../util/ToastAlerta";
 
 function FormTema() {
 
@@ -49,7 +51,7 @@ function FormTema() {
     // Cria um useEffect para monitorar o token
     useEffect(() => {
         if (token === '') {
-            alert('Você precisa estar logado!');
+            ToastAlerta('Você precisa estar logado!', 'erro');
             navigate('/')
         }
     }, [navigate, token])
@@ -77,43 +79,33 @@ function FormTema() {
 
         if (id !== undefined) {
 
-            // Atualização
             try {
-
                 await atualizar('/temas', tema, setTema, {
                     headers: { Authorization: token }
                 });
-
-                alert('Tema atualizado com sucesso!')
-
+                ToastAlerta('Tema atualizado com sucesso!', 'sucesso')
             } catch (error: any) {
-
                 if (error.toString().includes('401')) {
                     handleLogout();
                 } else {
-                    alert('Erro ao Atualizar o Tema!');
+                    ToastAlerta('Erro ao Atualizar o Tema!', 'erro');
                 }
             }
 
         } else {
 
-            // Cadastro
             try {
-
                 await cadastrar('/temas', tema, setTema, {
                     headers: { Authorization: token }
                 });
-
-                alert('Tema cadastrado com sucesso!')
-
+                ToastAlerta('Tema cadastrado com sucesso!', 'sucesso')
             } catch (error: any) {
                 if (error.toString().includes('401')) {
                     handleLogout();
                 } else {
-                    alert('Erro ao Cadastrar o Tema!');
+                    ToastAlerta('Erro ao Cadastrar o Tema!', 'erro');
                 }
             }
-
         }
 
         setIsLoading(false);
@@ -127,46 +119,80 @@ function FormTema() {
     console.log(JSON.stringify(tema));
 
     return (
-        <div className="container flex flex-col items-center justify-center mx-auto">
-            <h1 className="text-4xl text-center my-8 text-pink-500">
-                {id === undefined ? "Cadastrar" : "Editar"} Tema
-            </h1>
+        <div className="min-h-screen bg-[#0F172A] flex items-center justify-center px-4 pt-32">
 
-            <form className="w-1/2 flex flex-col gap-4"
-                onSubmit={gerarNovoTema}
-            >
-                <div className="flex flex-col gap-2 text-center text-xl text-pink-100">
-                    <label htmlFor="descricao">Descrição do Tema</label>
-                    <input
-                        type="text"
-                        placeholder="Descreva aqui seu tema"
-                        name='descricao'
-                        className="border-2 border-pink-600 hover:border-pink-400 rounded-lg p-2"
-                        value={tema.descricao}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-                    />
-                </div>
-                <button
-                    className="rounded-lg text-pink-100 bg-pink-500 cursor-pointer
-                            hover:bg-pink-600 w-1/2 py-2 mx-auto flex justify-center"
-                    type="submit">
+            <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="w-full max-w-xl bg-white/5 backdrop-blur-lg 
+                    border border-white/10 rounded-2xl p-6 md:p-8 shadow-md">
 
-                    {
-                        isLoading ?
+        <h1 className="text-3xl md:text-4xl text-center mb-6 font-bold text-pink-400">
+                    {id === undefined ? "Cadastrar Tema" : "Editar Tema"}
+                </h1>
 
-                            <ClipLoader
-                                color="#ffffff"
-                                size={24}
-                            />
+                <motion.form
+                    onSubmit={gerarNovoTema}
+                    className="flex flex-col gap-4"
+                    initial="hidden"
+                    animate="visible"
+                    variants={{
+                        hidden: {},
+                        visible: {
+                            transition: {
+                                staggerChildren: 0.1
+                            }
+                        }
+                    }}
+                >
 
-                            :
-                            <span>{id === undefined ? "Cadastrar" : "Atualizar"}</span>
-                    }
+                    <motion.div
+                        variants={{
+                            hidden: { opacity: 0, y: 20 },
+                            visible: { opacity: 1, y: 0 }
+                        }}
+                        className="flex flex-col gap-2 text-pink-100"
+                    >
+                        <label htmlFor="descricao" className="text-sm text-gray-400">
+                            Descrição do Tema
+                        </label>
 
-                </button>
-            </form>
+                        <input
+                            type="text"
+                            id="descricao" 
+                            name="descricao"
+                            placeholder="Ex: Frontend, Backend, DevOps..."
+                            value={tema.descricao}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                            className="border border-pink-400 rounded-lg px-2 py-2 
+                                    bg-transparent text-pink-100 outline-none 
+                                    focus:border-pink-500 focus:shadow-[0_0_10px_rgba(255,111,145,0.3)]"
+                            required
+                        />
+                    </motion.div>
+
+                    <motion.button
+                        type="submit"
+                        disabled={isLoading}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="mt-4 py-3 rounded-xl 
+                            bg-linear-to-r from-pink-500 to-pink-400 
+                            hover:from-pink-400 hover:to-pink-500 
+                            text-white font-semibold 
+                            flex items-center justify-center gap-2
+                            transition-all duration-300" >
+
+                        { isLoading ? <ClipLoader color="#ffffff" size={24} /> : 
+                        <span>{id === undefined ? "Cadastrar" : "Atualizar"}</span> }
+                    </motion.button>
+
+                </motion.form>
+
+            </motion.div>
         </div>
-    );
+    )
 }
 
 export default FormTema;

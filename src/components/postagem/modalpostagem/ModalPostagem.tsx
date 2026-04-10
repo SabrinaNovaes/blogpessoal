@@ -6,9 +6,13 @@ function ModalPostagem() {
     return (
         <>
             <Popup trigger={
-                <button className="flex rounded-lg p-5 gap-2 justify-center border-2 border-pink-500
-                    w-40 h-10 text-center items-center cursor-pointer hover:transition-transform
-                    duration-90 hover:scale-102 bg-linear-to-t from-pink-600 to-pink-800">Novo Post<BsPencil size={22} /></button>
+                <button
+                    className="bg-linear-to-r from-pink-500 to-pink-400 
+                    hover:from-pink-400 hover:to-pink-500 text-white font-semibold px-6 py-3 rounded-xl 
+                    shadow-md hover:shadow-pink-500/30 transition-all duration-300 
+                    ease-in-out hover:scale-105 flex items-center justify-center gap-2 mx-auto" >
+                            <BsPencil size={20} /> Novo Post
+                </button>
             }
                 modal contentStyle={{
 

@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Postagem from "../../../models/Postagem";
 import { buscar } from "../../../services/Service";
+import { motion } from "framer-motion";
+import { ToastAlerta } from "../../../util/ToastAlerta";
 
 function ListaPostagens() {
 
@@ -20,7 +22,7 @@ function ListaPostagens() {
 
     useEffect(() => {
         if (token === '') {
-            alert('Você precisa estar logado!')
+            ToastAlerta('Você precisa estar logado!', 'erro')
             navigate('/')
         }
     }, [token])
@@ -48,37 +50,46 @@ function ListaPostagens() {
 
     return (
         <>
+            <section className="bg-[#0F172A] text-pink-100 pt-32 min-h-screen">
 
-            {
-                isLoading && (
-                    <div className="flex justify-center w-full pt-40 ">
-                        <SyncLoader
-                            color="#FF6F91"
-                            size={32}
-                        />
+                {isLoading && (
+                    <div className="flex justify-center items-center w-full py-20">
+                        <SyncLoader color="#FF6F91" size={32} />
                     </div>
-                )
-            }
+                )}
 
-            <div className="flex justify-center w-full my-4">
-                <div className="container flex flex-col">
+                <div className="flex justify-center w-full px-4">
 
-                    {(!isLoading && postagens.length === 0) && (
-                        <span className="text-3xl text-center my-8">
-                            Nenhuma Postagem foi encontrada!
-                        </span>
-                    )}
+                    <div className="w-full max-w-2xl flex flex-col gap-6">
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 
-                                    lg:grid-cols-3 gap-8">
-                        {
-                            postagens.map((postagem) => (
-                                <CardPostagem key={postagem.id} postagem={postagem} />
-                            ))
-                        }
+                        {!isLoading && postagens.length === 0 && (
+                            <span className="text-pink-500 text-2xl md:text-3xl text-center py-20">
+                                Nenhuma Postagem foi encontrada!
+                            </span>
+                        )}
+
+                        {postagens.map((postagem, index) => (
+                            <motion.div
+                                key={postagem.id}
+
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{
+                                    delay: index * 0.08,
+                                    duration: 0.4
+                                }}
+
+                                whileHover={{ y: -4 }}
+
+                                className="w-full"
+                            >
+                                <CardPostagem postagem={postagem} />
+                            </motion.div>
+                        ))}
+
                     </div>
                 </div>
-            </div>
+            </section>
         </>
     );
 }

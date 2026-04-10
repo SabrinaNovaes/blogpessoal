@@ -4,6 +4,7 @@ import type UsuarioLogin from "../../models/UsuarioLogin";
 import { AuthContext } from "../../contexts/AuthContext";
 import { ClipLoader } from "react-spinners";
 import loginblog from "../../assets/img/loginblog.png"
+import { motion } from "framer-motion";
 
 
 function Login() {
@@ -41,64 +42,94 @@ function Login() {
 
     return (
         <>
-            <div className="h-screen grid grid-cols-1 lg:grid-cols-2 place-items-center bg-[#0F172A]">
-                <form className="flex justify-center items-center flex-col w-1/2 gap-4 text-pink-100"
-                    onSubmit={login}
-                >
-                    <h2 className="bg-linear-to-t from-pink-300 to-pink-500 bg-clip-text text-transparent 
-                        font-serif font-bold text-5xl leading-tight">Entrar</h2>
-                    <div className="flex flex-col w-full">
-                        <label htmlFor="usuario" className="px-1">Usuário</label>
-                        <input
-                            type="text"
-                            id="usuario"
-                            name="usuario"
-                            placeholder="Usuario"
-                            className="border-2 border-pink-400 rounded-lg h-10 p-2 hover:border-pink-300
-                            hover:shadow-sm shadow-pink-300"
-                            value={usuarioLogin.usuario}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-                        />
-                    </div>
-                    <div className="flex flex-col w-full">
-                        <label htmlFor="senha" className="px-1">Senha</label>
-                        <input
-                            type="password"
-                            id="senha"
-                            name="senha"
-                            placeholder="Senha"
-                            className="border-2 border-pink-400 rounded-lg h-10 p-2 hover:border-pink-400 hover:shadow-sm shadow-pink-300"
-                            value={usuarioLogin.senha}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-                        />
-                    </div>
-                    <button
-                        type='submit'
-                        className="rounded-lg bg-pink-600 hover:bg-pink-800to-pink-800  text-pink-100
-                                border-pink-900 border-solid border px-4 cursor-pointer w-1/2 py-2">
-                        {
-                            isLoading ?
+            <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen bg-[#0F172A]">
 
-                                <ClipLoader
-                                    color="#ffffff"
-                                    size={24}
-                                />
+                <div className="flex justify-center items-center px-6">
 
-                                :
+                    <motion.form
+                        onSubmit={login}
 
-                                <span>Entrar</span>
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
 
-                        }
-                    </button>
+                        className="w-full max-w-md flex flex-col gap-5 
+                            bg-white/5 backdrop-blur-lg border border-white/10 
+                            rounded-2xl p-6 shadow-md text-pink-100"
+                    >
 
-                    <hr className="border-slate-800 w-full" />
-                    <p>Ainda não tem uma conta?{' '}<Link to="/cadastro" className="text-pink-500 hover:underline">
-                    Cadastre-se</Link></p>
-                </form>
-                <div className="lg:block hidden bg-no-repeat 
-                    w-full min-h-screen bg-cover bg-center"
-                    style={{ backgroundImage: `url(${loginblog})` }}>
+                        <h2 className="text-4xl text-center font-bold 
+                            bg-linear-to-t from-pink-300 to-pink-500 
+                            bg-clip-text text-transparent">
+                            Entrar
+                        </h2>
+
+                        <div className="flex flex-col gap-1">
+                            <label className="text-sm text-gray-400">Usuário</label>
+                            <input
+                                type="text"
+                                name="usuario"
+                                value={usuarioLogin.usuario}
+                                onChange={atualizarEstado}
+                                placeholder="Digite seu usuário"
+                                className="border border-pink-400 rounded-lg px-2 py-2 
+                                    bg-transparent outline-none text-pink-100
+                                    focus:border-pink-500 focus:shadow-[0_0_10px_rgba(255,111,145,0.3)]"
+                            />
+                        </div>
+
+                        <div className="flex flex-col gap-1">
+                            <label className="text-sm text-gray-400">Senha</label>
+                            <input
+                                type="password"
+                                name="senha"
+                                value={usuarioLogin.senha}
+                                onChange={atualizarEstado}
+                                placeholder="Digite sua senha"
+                                className="border border-pink-400 rounded-lg px-2 py-2 
+                                    bg-transparent outline-none text-pink-100
+                                    focus:border-pink-500 focus:shadow-[0_0_10px_rgba(255,111,145,0.3)]"
+                            />
+                        </div>
+
+                        <motion.button
+                            type="submit"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+
+                            className="mt-2 py-2 rounded-lg 
+                                bg-linear-to-r from-pink-500 to-pink-400 
+                                hover:from-pink-400 hover:to-pink-500 
+                                text-white font-semibold flex justify-center items-center"
+                        >
+                            {isLoading ? (
+                                <ClipLoader color="#fff" size={20} />
+                            ) : (
+                                "Entrar"
+                            )}
+                        </motion.button>
+
+                        <div className="flex items-center gap-2 my-2">
+                            <div className="flex-1 h-px bg-white/10"></div>
+                            <span className="text-xs text-gray-500">ou</span>
+                            <div className="flex-1 h-px bg-white/10"></div>
+                        </div>
+
+                        <p className="text-sm text-center text-gray-400">
+                            Ainda não tem uma conta?{" "}
+                            <Link to="/cadastro" className="text-pink-400 hover:underline">
+                                Cadastre-se
+                            </Link>
+                        </p>
+
+                    </motion.form>
                 </div>
+
+                <div
+                    className="hidden lg:block bg-cover bg-center"
+                    style={{ backgroundImage: `url(${loginblog})` }}
+                />
+
             </div>
         </>
     );

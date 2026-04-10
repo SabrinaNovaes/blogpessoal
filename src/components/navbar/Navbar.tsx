@@ -1,21 +1,26 @@
-import { useContext } from "react";
+import { useContext, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { PiUserCircleDuotone } from "react-icons/pi";
 import { FiLogOut } from "react-icons/fi";
+import { ToastAlerta } from "../../util/ToastAlerta";
 
 function Navbar() {
     const navigate = useNavigate();
-    const { handleLogout } = useContext(AuthContext);
+    const { handleLogout, usuario } = useContext(AuthContext);
 
     function logout() {
         handleLogout();
-        alert("O usuário foi deslogado com sucesso!");
+        ToastAlerta("O usuário foi deslogado com sucesso!", "sucesso");
         navigate("/");
     }
 
-    return (
-        <div className="fixed w-full z-50 px-4 mt-3">
+    let component: ReactNode
+
+    if(usuario.token !== "") {
+        component = (
+
+            <div className="fixed w-full z-50 px-4 mt-3">
             <div className="flex items-center text-center justify-between max-w-6xl mx-auto px-6 py-3
                 rounded-2xl bg-white/10 backdrop-blur-lg border border-white/10 shadow-sm shadow-pink-300">
 
@@ -33,7 +38,7 @@ function Navbar() {
                         hover:drop-shadow-lg hover:drop-shadow-pink-300">Temas</Link>
                     <Link to="/cadastrartema" className="text-xl hover:text-pink-400 hover:border-pink-400 
                         hover:drop-shadow-lg hover:drop-shadow-pink-300">Novo Tema</Link>
-                    <Link to="/login" className="text-xl flex items-center gap-2 hover:text-pink-400 hover:border-pink-400 
+                    <Link to="/perfil" className="text-xl flex items-center gap-2 hover:text-pink-400 hover:border-pink-400 
                         hover:drop-shadow-lg hover:drop-shadow-pink-300">
                         <PiUserCircleDuotone size={30} />Perfil
                     </Link>
@@ -45,6 +50,14 @@ function Navbar() {
                 </div>
             </div>
         </div>
+
+        )
+    }
+
+    return (
+        <>
+            { component }
+        </>
     );
 }
 

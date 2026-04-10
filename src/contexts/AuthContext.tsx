@@ -1,6 +1,9 @@
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createContext, useState, type ReactNode } from "react";
 import type UsuarioLogin from "../models/UsuarioLogin";
 import { login } from "../services/Service";
+import { ToastAlerta } from "../util/ToastAlerta";
 
 interface AuthContextProps {
     usuario: UsuarioLogin
@@ -37,9 +40,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
         try {
             await login('/usuarios/logar', usuario, setUsuario)
-            alert('Usuário autenticado com sucesso!')
+            ToastAlerta('Usuário autenticado com sucesso!', 'sucesso')
         } catch (error) {
-            alert('E-mail ou senha incorretos!')
+            ToastAlerta('E-mail ou senha incorretos!', 'erro')
         }
         setIsLoading(false)
     }
