@@ -8,6 +8,7 @@ import { buscar } from "../../../services/Service";
 import { SyncLoader } from "react-spinners";
 import { motion } from "framer-motion";
 import { ToastAlerta } from "../../../util/ToastAlerta";
+import ModalTema from "../modaltema/ModalTema";
 
 function ListaTemas() {
 
@@ -75,6 +76,19 @@ function ListaTemas() {
                             Nenhum Tema foi encontrado!
                         </span>
                     )}
+
+                    <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, ease: "easeOut" }}
+                            className="w-full flex justify-between items-center px-6 py-4"
+                        >
+                            <h1 className="text-4xl font-extrabold p-2
+                            bg-linear-to-r from-pink-400 via-pink-300 to-pink-500 
+                            bg-clip-text text-transparent drop-shadow-sm">Tags</h1>
+
+                            <ModalTema />
+                        </motion.div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                         {temas.map((tema, index) => (

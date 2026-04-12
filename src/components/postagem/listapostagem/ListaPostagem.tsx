@@ -8,6 +8,7 @@ import type Postagem from "../../../models/Postagem";
 import { buscar } from "../../../services/Service";
 import { motion } from "framer-motion";
 import { ToastAlerta } from "../../../util/ToastAlerta";
+import ModalPostagem from "../modalpostagem/ModalPostagem";
 
 function ListaPostagens() {
 
@@ -54,7 +55,7 @@ function ListaPostagens() {
 
                 {isLoading && (
                     <div className="flex justify-center items-center w-full py-20">
-                        <SyncLoader color="#FF6F91" size={32} />
+                        <SyncLoader color="#FF6F91" size={20} />
                     </div>
                 )}
 
@@ -63,10 +64,25 @@ function ListaPostagens() {
                     <div className="w-full max-w-2xl flex flex-col gap-6">
 
                         {!isLoading && postagens.length === 0 && (
-                            <span className="text-pink-500 text-2xl md:text-3xl text-center py-20">
+                            <span className="flex w-full jutify-between items-center gap-4 m-auto text-4xl
+                            text-center font-bold bg-linear-to-t from-pink-300 to-pink-500 
+                            bg-clip-text text-transparent md:text-3xl py-20">
                                 Nenhuma Postagem foi encontrada!
                             </span>
                         )}
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, ease: "easeOut" }}
+                            className="w-full flex justify-between items-center px-6 py-4"
+                        >
+                            <h1 className="text-4xl font-extrabold p-2
+                            bg-linear-to-r from-pink-400 via-pink-300 to-pink-500 
+                            bg-clip-text text-transparent drop-shadow-sm">Posts</h1>
+
+                            <ModalPostagem />
+                        </motion.div>
 
                         {postagens.map((postagem, index) => (
                             <motion.div

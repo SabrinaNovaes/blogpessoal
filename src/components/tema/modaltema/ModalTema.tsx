@@ -1,8 +1,8 @@
 import Popup from 'reactjs-popup'
-import FormPostagem from '../formpostagem/FormPostagem'
+import FormTema from '../formtema/FormTema.tsx'
 import { GrAddCircle } from 'react-icons/gr'
 
-function ModalPostagem() {
+function ModalTema() {
     return (
         <>
             <Popup trigger={
@@ -16,10 +16,10 @@ function ModalPostagem() {
             }
                 modal contentStyle={{ 
                 }}>
-                <FormPostagem />
+                <FormTema/>
             </Popup>
         </>
     )
 }
 
-export default ModalPostagem
+export default ModalTema

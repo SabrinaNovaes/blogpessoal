@@ -119,16 +119,17 @@ function FormTema() {
     console.log(JSON.stringify(tema));
 
     return (
-        <div className="min-h-screen bg-[#0F172A] flex items-center justify-center px-4 pt-32">
+        <div className="min-h-screen flex items-center justify-center px-4 pt-32">
 
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="w-full max-w-xl bg-white/5 backdrop-blur-lg 
-                    border border-white/10 rounded-2xl p-6 md:p-8 shadow-md">
+                className="w-120 max-w-xl bg-[#0F172A]/95 backdrop-blur-lg border border-pink-400/20 
+                        rounded-2xl p-6 shadow-xl shadow-pink-500/10 text-pink-100 m-auto">
 
-        <h1 className="text-3xl md:text-4xl text-center mb-6 font-bold text-pink-400">
+        <h1 className="text-3xl md:text-4xl text-center mb-6 font-bold 
+                        bg-linear-to-t from-pink-300 to-pink-500 bg-clip-text text-transparent">
                     {id === undefined ? "Cadastrar Tema" : "Editar Tema"}
                 </h1>
 
