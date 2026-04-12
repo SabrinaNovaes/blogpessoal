@@ -119,7 +119,7 @@ function FormPostagem() {
         } else {
             try {
                 await cadastrar(`/postagens`, postagem, setPostagem, {
-                    header: { Authorization: token, },
+                    headers: { Authorization: token, },
                 })
 
                 ToastAlerta("Post Cadastrado com sucesso", "sucesso")
