@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import type UsuarioLogin from "../../models/UsuarioLogin";
 import { AuthContext } from "../../contexts/AuthContext";
 import { ClipLoader } from "react-spinners";
-import loginblog from "../../assets/img/loginblog.png"
+import loginblog from "../../assets/img/blogloginimg.png";
 import { motion } from "framer-motion";
 
 
@@ -23,7 +23,7 @@ function Login() {
         if (usuario.token !== "") {
             navigate("/home")
         }
-    }, [usuario])
+    }, [navigate, usuario])
 
     // Função de atualização do estado usuario
     function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {

@@ -41,3 +41,15 @@ export const atualizar = async (url: string, dados: Object, setDados: Function, 
 export const deletar = async (url: string, header: Object) => {
     await api.delete(url, header);
 }
+
+// CURTIR
+export const curtir = async (url: string, dados: Object, setDados: Function, header: Object) => {
+    const resposta = await api.put(url, dados, header);
+    setDados(resposta.data);
+}
+
+// COMENTAR 
+export const comentar = async (url: string, dados: Object, setDados: Function, header: Object) => {
+    const resposta = await api.put(url, dados, header);
+    setDados(resposta.data);
+}

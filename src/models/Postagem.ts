@@ -6,6 +6,8 @@ export default interface Postagem {
     titulo: string
     texto: string
     data: string
+    like: number
+    comentario: string
     tema: Tema | null
     usuario: Usuario | null
 }

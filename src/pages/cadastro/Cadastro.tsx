@@ -5,6 +5,7 @@ import { cadastrarUsuario } from "../../services/Service";
 import { ClipLoader } from "react-spinners";
 import { motion } from "framer-motion";
 import { ToastAlerta } from "../../util/ToastAlerta";
+import cadastroimg from "../../assets/img/cadastroimg.png";
 
 function Cadastro() {
 
@@ -92,7 +93,7 @@ function Cadastro() {
 
                 <div
                     className="hidden lg:block bg-cover bg-center"
-                    style={{ backgroundImage: "url('https://i.imgur.com/ZZFAmzo.jpg')" }}
+                    style={{ backgroundImage: `url(${cadastroimg})`}}
                 />
 
                 <div className="flex justify-center items-center px-6">
