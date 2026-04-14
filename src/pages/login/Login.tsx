@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import type UsuarioLogin from "../../models/UsuarioLogin";
 import { AuthContext } from "../../contexts/AuthContext";
 import { ClipLoader } from "react-spinners";
-import loginblog from "../../assets/img/loginblog.png"
+import imglogin from "../../assets/img/imglogin.png"
 import { motion } from "framer-motion";
 
 
@@ -65,13 +65,13 @@ function Login() {
                         </h2>
 
                         <div className="flex flex-col gap-1">
-                            <label className="text-sm text-gray-400">Usuário</label>
+                            <label className="text-sm text-gray-400">E-mail</label>
                             <input
                                 type="text"
                                 name="usuario"
                                 value={usuarioLogin.usuario}
                                 onChange={atualizarEstado}
-                                placeholder="Digite seu usuário"
+                                placeholder="Digite seu email"
                                 className="border border-pink-400 rounded-lg px-2 py-2 
                                     bg-transparent outline-none text-pink-100
                                     focus:border-pink-500 focus:shadow-[0_0_10px_rgba(255,111,145,0.3)]"
@@ -127,7 +127,7 @@ function Login() {
 
                 <div
                     className="hidden lg:block bg-cover bg-center"
-                    style={{ backgroundImage: `url(${loginblog})` }}
+                    style={{ backgroundImage: `url(${imglogin})` }}
                 />
 
             </div>

@@ -5,6 +5,8 @@ import { cadastrarUsuario } from "../../services/Service";
 import { ClipLoader } from "react-spinners";
 import { motion } from "framer-motion";
 import { ToastAlerta } from "../../util/ToastAlerta";
+import imgcadastro from "../../assets/img/imgcadastro.png"
+
 
 function Cadastro() {
 
@@ -92,7 +94,7 @@ function Cadastro() {
 
                 <div
                     className="hidden lg:block bg-cover bg-center"
-                    style={{ backgroundImage: "url('https://i.imgur.com/ZZFAmzo.jpg')" }}
+                    style={{ backgroundImage: `url(${imgcadastro})`}}
                 />
 
                 <div className="flex justify-center items-center px-6">
@@ -130,13 +132,13 @@ function Cadastro() {
                         </div>
 
                         <div className="flex flex-col gap-1">
-                            <label className="text-sm text-gray-400">Usuário</label>
+                            <label className="text-sm text-gray-400">E-mail</label>
                             <input
                                 type="text"
                                 name="usuario"
                                 value={usuario.usuario}
                                 onChange={atualizarEstado}
-                                placeholder="Digite seu usuário"
+                                placeholder="Digite seu email"
                                 className="border border-pink-400 rounded-lg px-2 py-2 
                                     bg-transparent text-pink-100 outline-none
                                     focus:border-pink-500 focus:shadow-[0_0_10px_rgba(255,111,145,0.3)]"
