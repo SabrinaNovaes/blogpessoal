@@ -24,14 +24,14 @@ function Footer() {
                     </p>
                     <div className="flex pt-2 gap-5">
                         <Link
-                            to="" className="hover:text-pink-400 transition duration-300
+                            to="https://www.linkedin.com/in/sabrina-novaes/" className="hover:text-pink-400 transition duration-300
                             hover:scale-110 hover:drop-shadow-lg 
                             hover:drop-shadow-pink-400">
                             <LinkedinLogoIcon size={28} />
                         </Link>
 
                         <Link
-                            to="" className="hover:text-pink-400 transition duration-300
+                            to="https://github.com/SabrinaNovaes" className="hover:text-pink-400 transition duration-300
                                 hover:scale-110 hover:drop-shadow-lg 
                                 hover:drop-shadow-pink-400">
                             <GithubLogoIcon size={28} />
