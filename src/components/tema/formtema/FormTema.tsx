@@ -12,40 +12,35 @@ import { FaCheck, FaExclamationTriangle } from "react-icons/fa";
 function FormTema() {
 
     // Objeto responsável por redirecionar o usuário para uma outra rota
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     // Estado para controlar o Loader (animação de carregamento)
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     // Estado que irá receber os dados do tema que será persistido no Backend
-    const [tema, setTema] = useState<Tema>({} as Tema);
+    const [tema, setTema] = useState<Tema>({} as Tema)
 
     // Acessa o token do usuário autenticado
-    const { usuario, handleLogout } = useContext(AuthContext);
+    const { usuario, handleLogout } = useContext(AuthContext)
 
     // Cria um objeto para armazenar o token
-    const token = usuario.token;
+    const token = usuario.token
 
     // Acessar o parâmetro id da rota de edição do tema
-    const { id } = useParams<{ id: string }>();
+    const { id } = useParams<{ id: string }>()
 
     // Função para buscar um tema pelo id no backend
     // que será atualizado no form
     async function buscarTemaPorId() {
         try {
-
-            setIsLoading(true);
-
             await buscar(`/temas/${id}`, setTema, {
                 headers: { Authorization: token }
             });
 
         } catch (error: any) {
             if (error.toString().includes('401')) {
-                handleLogout();
+                handleLogout()
             }
-        } finally {
-            setIsLoading(false);
         }
     }
 
@@ -60,7 +55,7 @@ function FormTema() {
     // Cria um useEffect para monitorar o id (rota)
     useEffect(() => {
         if (id !== undefined) {
-            buscarTemaPorId();
+            buscarTemaPorId()
         }
     }, [id])
 
@@ -76,28 +71,35 @@ function FormTema() {
         e.preventDefault()
         setIsLoading(true)
 
-        try {
-            if (id !== undefined) {
-                await atualizar('/temas', tema, setTema, {
+        if (id !== undefined) {
+            try {
+                await atualizar(`/temas/${id}`, tema, setTema, {
                     headers: { Authorization: token }
                 })
                 ToastAlerta('Tema atualizado com sucesso!', 'sucesso');
-            } else {
-                await cadastrar('/temas', tema, setTema, {
+            } catch (error: any) {
+                if (error.toString().includes('401')) {
+                    handleLogout()
+                } else {
+                    ToastAlerta('Erro ao Atualizar o Tema!', 'erro')
+                }
+            }
+        } else {
+            try {
+                await cadastrar(`/temas`, tema, setTema, {
                     headers: { Authorization: token }
                 })
                 ToastAlerta('Tema cadastrado com sucesso!', 'sucesso');
+            } catch (error: any) {
+                if (error.toString().includes('401')) {
+                    handleLogout()
+                } else {
+                    ToastAlerta('Erro ao Cadastrar o Tema!', 'erro')
+                }
             }
-            retornar()
-        } catch (error: any) {
-            if (error.toString().includes('401')) {
-                handleLogout()
-            } else {
-                ToastAlerta('Erro ao Cadastrar o Tema!', 'erro')
-            }
-        } finally {
-            setIsLoading(false)
         }
+        setIsLoading(false)
+        retornar()
     }
 
     function retornar() {
@@ -184,8 +186,8 @@ function FormTema() {
                             flex items-center justify-center gap-2
                             transition-all duration-300" >
 
-                        {isLoading ? <ClipLoader color="#ffffff" size={24} /> :
-                            <span>{id === undefined ? "Cadastrar" : "Atualizar"}</span>}
+                        {isLoading ? (<ClipLoader color="#ffffff" size={24} /> ) : (
+                            id === undefined ? "Cadastrar" : "Atualizar" )}
                     </motion.button>
 
                 </motion.form>

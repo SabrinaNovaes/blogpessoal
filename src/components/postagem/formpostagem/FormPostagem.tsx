@@ -30,6 +30,8 @@ function FormPostagem() {
 
     async function buscarPostagemPorId(id: string) {
         try {
+            setIsLoading(true)
+
             await buscar(`/postagens/${id}`, setPostagem, {
                 headers: { Authorization: token }
             })
@@ -130,7 +132,6 @@ function FormPostagem() {
                 }
             }
         }
-
         setIsLoading(false)
         retornar()
     }
@@ -139,7 +140,7 @@ function FormPostagem() {
 
     return (
         <>
-            <section className="justify-center items-center px-4">
+            <section className="justify-center items-center px-4 py-28">
 
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}

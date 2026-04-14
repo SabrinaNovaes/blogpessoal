@@ -16,7 +16,7 @@ function ModalTema() {
             }
                 modal contentStyle={{ 
                 }}>
-                <FormTema/>
+                <FormTema />
             </Popup>
         </>
     )
