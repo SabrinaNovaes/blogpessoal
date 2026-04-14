@@ -7,6 +7,7 @@ import { AuthContext } from "../../contexts/AuthContext"
 import type Usuario from "../../models/Usuario"
 import { atualizar, buscar } from "../../services/Service"
 import { ToastAlerta } from "../../util/ToastAlerta"
+import { FaCheck, FaExclamationTriangle } from "react-icons/fa"
 
 
 function AtualizarPerfil() {
@@ -22,7 +23,6 @@ function AtualizarPerfil() {
     const token = usuario.token
     const id: string = usuario.id.toString()
 
-    const emailValido = usuario.usuario?.includes('@') && usuario.usuario?.includes('.')
     const senhasIguais = usuario.senha === confirmarSenha
 
     async function buscarUsuarioPorId() {
