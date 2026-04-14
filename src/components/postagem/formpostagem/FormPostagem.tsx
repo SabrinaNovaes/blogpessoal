@@ -121,7 +121,6 @@ function FormPostagem() {
                 await cadastrar(`/postagens`, postagem, setPostagem, {
                     headers: { Authorization: token, },
                 })
-
                 ToastAlerta("Post Cadastrado com sucesso", "sucesso")
             } catch (error: any) {
                 if (error.toString().includes("401")) {
@@ -140,7 +139,7 @@ function FormPostagem() {
 
     return (
         <>
-            <section className="justify-center items-center px-4 pt-32">
+            <section className="justify-center items-center px-4">
 
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}

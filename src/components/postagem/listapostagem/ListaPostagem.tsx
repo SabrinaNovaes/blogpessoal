@@ -84,21 +84,25 @@ function ListaPostagens() {
                             <ModalPostagem />
                         </motion.div>
 
-                        {postagens.map((postagem, index) => (
-                            <motion.div
-                                key={postagem.id}
+                        {[...postagens]
+                            .sort((a, b) =>
+                                new Date(b.data).getTime() - new Date(a.data).getTime()
+                            )
+                            .map((postagem, index) => (
+                                <motion.div
+                                    key={postagem.id}
 
-                                initial={{ opacity: 0, y: 30 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{
-                                    delay: index * 0.08,
-                                    duration: 0.4
-                                }}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{
+                                        delay: index * 0.08,
+                                        duration: 0.4
+                                    }}
 
-                                whileHover={{ y: -4 }}
+                                    whileHover={{ y: -4 }}
 
-                                className="w-full"
-                            >
+                                    className="w-full"
+                                >
                                 <CardPostagem postagem={postagem} />
                             </motion.div>
                         ))}

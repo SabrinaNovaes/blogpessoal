@@ -2,7 +2,6 @@ import blogpessoal from "../../assets/img/blogpessoalimg.png";
 import { motion } from "framer-motion";
 import ListaPostagem from "../../components/postagem/listapostagem/ListaPostagem";
 import ModalPostagem from "../../components/postagem/modalpostagem/ModalPostagem";
-import { BsPencil } from "react-icons/bs";
 
 export default function Home() {
     return (
@@ -21,7 +20,7 @@ export default function Home() {
                             animate={{ y: [0, -10, 0] }}
                             transition={{ duration: 3, repeat: Infinity }}
                             alt="Imagem Página Home"
-                            className="drop-shadow-lg drop-shadow-pink-400 w-5/4" />
+                            className="drop-shadow-lg drop-shadow-pink-400 w-3/3" />
                     </figure>
 
                     <div
@@ -43,13 +42,11 @@ export default function Home() {
                     </div>
                 </article>
             </section>
-            <div className="max-w-5xl mx-auto my-12 px-4">
-                <div className="h-0.5 bg-linear-to-r from-transparent via-pink-400 to-transparent ">
+            <div className="max-w-5xl mx-auto my-2 ">
+                <div className="h-0.5 bg-linear-to-r from-transparent via-pink-400 to-transparent">
                 </div>
             </div>
-            <h1 className="flex items-center justify-center text-3xl md:text-4xl font-bold 
-                        bg-linear-to-t from-pink-300 to-pink-500 bg-clip-text text-transparent gap-6">
-                            Feed<BsPencil size={30} className="text-pink-400"/></h1>
+            
             <ListaPostagem />
         </>
     )

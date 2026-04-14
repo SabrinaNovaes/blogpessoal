@@ -5,6 +5,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { ClipLoader } from "react-spinners";
 import imglogin from "../../assets/img/imglogin.png"
 import { motion } from "framer-motion";
+import { FaExclamationTriangle } from "react-icons/fa";
 
 
 function Login() {
@@ -18,6 +19,8 @@ function Login() {
     // Consumo do Contexto AuthContext 
     // usamos a desestruturação para selecionar apenas o que precisamos
     const { usuario, handleLogin, isLoading } = useContext(AuthContext);
+
+    const emailValido = usuarioLogin.usuario?.includes('@') && usuarioLogin.usuario?.includes('.');
 
     useEffect(() => {
         if (usuario.token !== "") {
@@ -76,6 +79,12 @@ function Login() {
                                     bg-transparent outline-none text-pink-100
                                     focus:border-pink-500 focus:shadow-[0_0_10px_rgba(255,111,145,0.3)]"
                             />
+                            {usuarioLogin.usuario?.length > 0 && !emailValido && (
+                                <span className="text-red-400 text-xs flex items-center gap-2">
+                                    <FaExclamationTriangle size={16} />
+                                    Digite um e-mail válido
+                                </span>
+                            )}
                         </div>
 
                         <div className="flex flex-col gap-1">

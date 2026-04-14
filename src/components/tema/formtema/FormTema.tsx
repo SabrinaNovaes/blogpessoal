@@ -7,6 +7,7 @@ import { atualizar, buscar, cadastrar } from "../../../services/Service";
 import { ClipLoader } from "react-spinners";
 import { motion } from "framer-motion";
 import { ToastAlerta } from "../../../util/ToastAlerta";
+import { FaCheck, FaExclamationTriangle } from "react-icons/fa";
 
 function FormTema() {
 
@@ -72,54 +73,39 @@ function FormTema() {
     }
 
     async function gerarNovoTema(e: SyntheticEvent<HTMLFormElement>) {
+        e.preventDefault()
+        setIsLoading(true)
 
-        e.preventDefault();
-
-        setIsLoading(true);
-
-        if (id !== undefined) {
-
-            try {
+        try {
+            if (id !== undefined) {
                 await atualizar('/temas', tema, setTema, {
                     headers: { Authorization: token }
-                });
-                ToastAlerta('Tema atualizado com sucesso!', 'sucesso')
-            } catch (error: any) {
-                if (error.toString().includes('401')) {
-                    handleLogout();
-                } else {
-                    ToastAlerta('Erro ao Atualizar o Tema!', 'erro');
-                }
-            }
-
-        } else {
-
-            try {
+                })
+                ToastAlerta('Tema atualizado com sucesso!', 'sucesso');
+            } else {
                 await cadastrar('/temas', tema, setTema, {
                     headers: { Authorization: token }
-                });
-                ToastAlerta('Tema cadastrado com sucesso!', 'sucesso')
-            } catch (error: any) {
-                if (error.toString().includes('401')) {
-                    handleLogout();
-                } else {
-                    ToastAlerta('Erro ao Cadastrar o Tema!', 'erro');
-                }
+                })
+                ToastAlerta('Tema cadastrado com sucesso!', 'sucesso');
             }
+            retornar()
+        } catch (error: any) {
+            if (error.toString().includes('401')) {
+                handleLogout()
+            } else {
+                ToastAlerta('Erro ao Cadastrar o Tema!', 'erro')
+            }
+        } finally {
+            setIsLoading(false)
         }
-
-        setIsLoading(false);
-        retornar();
     }
 
     function retornar() {
-        navigate('/temas');
+        navigate('/temas')
     }
 
-    console.log(JSON.stringify(tema));
-
     return (
-        <div className="min-h-screen flex items-center justify-center px-4 pt-32">
+        <div className="min-h-screen flex items-center justify-center px-4">
 
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -128,7 +114,7 @@ function FormTema() {
                 className="w-120 max-w-xl bg-[#0F172A]/95 backdrop-blur-lg border border-pink-400/20 
                         rounded-2xl p-6 shadow-xl shadow-pink-500/10 text-pink-100 m-auto">
 
-        <h1 className="text-3xl md:text-4xl text-center mb-6 font-bold 
+                <h1 className="text-3xl md:text-4xl text-center mb-6 font-bold 
                         bg-linear-to-t from-pink-300 to-pink-500 bg-clip-text text-transparent">
                     {id === undefined ? "Cadastrar Tema" : "Editar Tema"}
                 </h1>
@@ -161,7 +147,7 @@ function FormTema() {
 
                         <input
                             type="text"
-                            id="descricao" 
+                            id="descricao"
                             name="descricao"
                             placeholder="Ex: Frontend, Backend, DevOps..."
                             value={tema.descricao}
@@ -171,13 +157,26 @@ function FormTema() {
                                     focus:border-pink-500 focus:shadow-[0_0_10px_rgba(255,111,145,0.3)]"
                             required
                         />
+
+                        {tema.descricao?.length > 0 && tema.descricao?.length < 5 && (
+                            <span className="text-red-400 text-xs flex items-center gap-2">
+                                <FaExclamationTriangle size={16}/>
+                                O campo deve conter no mínimo 5 caracteres ({tema.descricao.length}/5)
+                            </span>
+                        )}
+
+                        {tema.descricao?.length >= 5 && (
+                            <span className="text-green-400 text-xs">
+                                <FaCheck size={16} /> {tema.descricao.length} caracteres
+                            </span>
+                        )}
                     </motion.div>
 
                     <motion.button
                         type="submit"
-                        disabled={isLoading}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
+                        disabled={isLoading || !tema.descricao || tema.descricao.length < 5}
                         className="mt-4 py-3 rounded-xl 
                             bg-linear-to-r from-pink-500 to-pink-400 
                             hover:from-pink-400 hover:to-pink-500 
@@ -185,8 +184,8 @@ function FormTema() {
                             flex items-center justify-center gap-2
                             transition-all duration-300" >
 
-                        { isLoading ? <ClipLoader color="#ffffff" size={24} /> : 
-                        <span>{id === undefined ? "Cadastrar" : "Atualizar"}</span> }
+                        {isLoading ? <ClipLoader color="#ffffff" size={24} /> :
+                            <span>{id === undefined ? "Cadastrar" : "Atualizar"}</span>}
                     </motion.button>
 
                 </motion.form>

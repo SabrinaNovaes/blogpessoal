@@ -30,7 +30,7 @@ function CardTema({ tema }: CardTemaProps) {
             <BsPencil size={20} />
         </Link>
 
-        <Link to="" className="hover:text-red-500 text-pink-300">
+        <Link to={`/deletartema/${tema.id}`} className="hover:text-red-500 text-pink-300">
             <FaTrash size={20} />
         </Link>
 
