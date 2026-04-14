@@ -4,10 +4,9 @@ import type Usuario from "../../models/Usuario";
 import { ClipLoader } from "react-spinners";
 import { motion } from "framer-motion";
 import { ToastAlerta } from "../../util/ToastAlerta";
-import imgcadastro from "../../assets/img/imgcadastro.png"
+import imglogin from "../../assets/img/imglogin.png"
 import { FaCheck, FaExclamationTriangle } from "react-icons/fa";
 import { cadastrarUsuario } from "../../services/Service";
-
 
 function Cadastro() {
 
@@ -98,7 +97,7 @@ function Cadastro() {
 
                 <div
                     className="hidden lg:block bg-cover bg-center"
-                    style={{ backgroundImage: `url(${imgcadastro})` }}
+                    style={{ backgroundImage: `url(${imglogin})` }}
                 />
 
                 <div className="flex justify-center items-center px-6">

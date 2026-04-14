@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import type UsuarioLogin from "../../models/UsuarioLogin";
 import { AuthContext } from "../../contexts/AuthContext";
 import { ClipLoader } from "react-spinners";
-import imglogin from "../../assets/img/imglogin.png"
+import imgcadastro from "../../assets/img/imgcadastro.png"
 import { motion } from "framer-motion";
 import { FaExclamationTriangle } from "react-icons/fa";
 
@@ -136,7 +136,7 @@ function Login() {
 
                 <div
                     className="hidden lg:block bg-cover bg-center"
-                    style={{ backgroundImage: `url(${imglogin})` }}
+                    style={{ backgroundImage: `url(${imgcadastro})` }}
                 />
 
             </div>
