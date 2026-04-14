@@ -22,6 +22,9 @@ function AtualizarPerfil() {
     const token = usuario.token
     const id: string = usuario.id.toString()
 
+    const emailValido = usuario.usuario?.includes('@') && usuario.usuario?.includes('.')
+    const senhasIguais = usuario.senha === confirmarSenha
+
     async function buscarUsuarioPorId() {
         try {
             await buscar(`/usuarios/${id}`, setUser, {
@@ -158,6 +161,19 @@ function AtualizarPerfil() {
                                     focus:border-pink-500 focus:shadow-[0_0_10px_rgba(255,111,145,0.3)]"
                                         required
                                     />
+                                    {usuario.nome?.length > 0 && usuario.nome?.length < 3 && (
+                                        <span className="text-red-400 text-xs flex items-center gap-2">
+                                            <FaExclamationTriangle size={16} />
+                                            O campo deve conter no mínimo 3 caracteres ({usuario.nome.length}/3)
+                                        </span>
+                                    )}
+
+                                    {usuario.nome?.length >= 5 && (
+                                        <span className="text-green-400 text-xs flex items-center gap-2">
+                                            <FaCheck size={16} />
+                                            {usuario.nome.length} caracteres
+                                        </span>
+                                    )}
                                 </div>
 
                                 <div className="flex flex-col">
@@ -197,6 +213,19 @@ function AtualizarPerfil() {
                                         required
                                         minLength={8}
                                     />
+                                    {usuario.senha?.length > 0 && usuario.senha?.length < 8 && (
+                                        <span className="text-red-400 text-xs flex items-center gap-2">
+                                            <FaExclamationTriangle size={16} />
+                                            O campo deve conter no mínimo 8 caracteres ({usuario.senha.length}/8)
+                                        </span>
+                                    )}
+
+                                    {usuario.senha?.length >= 5 && (
+                                        <span className="text-green-400 text-xs flex items-center gap-2">
+                                            <FaCheck size={16} />
+                                            {usuario.senha.length} caracteres
+                                        </span>
+                                    )}
                                 </div>
 
                                 <div className="flex flex-col">
@@ -211,6 +240,19 @@ function AtualizarPerfil() {
                                         required
                                         minLength={8}
                                     />
+                                    {confirmarSenha.length > 0 && !senhasIguais && (
+                                <span className="text-red-400 text-xs flex items-center gap-2">
+                                    <FaExclamationTriangle size={16} />
+                                    As senhas não coincidem
+                                </span>
+                            )}
+
+                            {confirmarSenha.length > 0 && senhasIguais && (
+                                <span className="text-green-400 text-xs flex items-center gap-2">
+                                    <FaCheck size={16} />
+                                    As senhas coincidem
+                                </span>
+                            )}
                                 </div>
 
                                 <div className="flex gap-4 pt-4">
