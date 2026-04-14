@@ -14,6 +14,7 @@ import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css'
 import AtualizarPerfil from "./pages/perfil/AtualizarPerfil"
 import Perfil from "./pages/perfil/Perfil"
+import DeletarPostagem from "./components/postagem/deletarpostagem/DeletarPostagem"
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
               <Route path="/postagens" element={<ListaPostagens />} />
               <Route path="/cadastrarpostagem" element={<FormPostagem />} />
               <Route path="/editarpostagem/:id" element={<FormPostagem />} />
+              <Route path="/deletarpostagem/:id" element={<DeletarPostagem />} />
               <Route path="/temas" element={<ListaTemas />} />
               <Route path="/cadastrartema" element={<FormTema />} />
               <Route path="/editartema/:id" element={<FormTema />} />
