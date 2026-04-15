@@ -46,16 +46,18 @@ function ListaTemas() {
 
             setIsLoading(true);
 
-            await buscar('/temas', setTemas, {
+            await buscar('/temas', (dados: Tema[]) => {
+                setTemas(dados.sort((a, b) => b.id - a.id))
+            }, {
                 headers: { Authorization: token }
-            });
+            })
 
         } catch (error: any) {
             if (error.toString().includes('401')) {
-                handleLogout();
+                handleLogout()
             }
         } finally {
-            setIsLoading(false);
+            setIsLoading(false)
         }
     }
 
@@ -96,6 +98,7 @@ function ListaTemas() {
                     </motion.div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+
                         {temas.map((tema, index) => (
                             <motion.div
                                 key={tema.id}
