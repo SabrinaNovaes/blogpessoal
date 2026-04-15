@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"
+import { useContext, useEffect, useState } from "react"
+import type Tema from "../../../models/Tema"
+import { AuthContext } from "../../../contexts/AuthContext"
+import { buscar } from "../../../services/Service"
+import { SyncLoader } from "react-spinners"
+import { motion } from "framer-motion"
+import { ToastAlerta } from "../../../util/ToastAlerta"
 import CardTema from "../cardtema/CardTema"
-import { useContext, useEffect, useState } from "react";
-import type Tema from "../../../models/Tema";
-import { AuthContext } from "../../../contexts/AuthContext";
-import { buscar } from "../../../services/Service";
-import { SyncLoader } from "react-spinners";
-import { motion } from "framer-motion";
-import { ToastAlerta } from "../../../util/ToastAlerta";
-import ModalTema from "../modaltema/ModalTema";
+import { GrAddCircle } from "react-icons/gr"
 
 function ListaTemas() {
 
@@ -65,7 +65,7 @@ function ListaTemas() {
 
                 {isLoading && (
                     <div className="flex justify-center items-center w-full py-20">
-                        <SyncLoader color="#FF6F91" size={32} />
+                        <SyncLoader color="#FF6F91" size={20} />
                     </div>
                 )}
 
@@ -78,17 +78,22 @@ function ListaTemas() {
                     )}
 
                     <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, ease: "easeOut" }}
-                            className="w-full flex justify-between items-center px-6 py-4"
-                        >
-                            <h1 className="text-4xl font-extrabold p-2
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, ease: "easeOut" }}
+                        className="w-full flex justify-between items-center px-6 py-4"
+                    >
+                        <h1 className="text-4xl font-extrabold p-2
                             bg-linear-to-r from-pink-400 via-pink-300 to-pink-500 
                             bg-clip-text text-transparent drop-shadow-sm">Tags</h1>
 
-                            <ModalTema />
-                        </motion.div>
+                        <Link to="/cadastrartema" className="bg-linear-to-r from-pink-500 to-pink-400 
+                            hover:from-pink-400 hover:to-pink-500 text-white font-semi bold px-6 py-3 rounded-xl 
+                            shadow-md hover:shadow-pink-500/30 transition-all duration-300 
+                            ease-in-out hover:scale-105 flex items-center justify-center gap-2" >
+                            <GrAddCircle size={20} />Novo Tema
+                        </Link>
+                    </motion.div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                         {temas.map((tema, index) => (

@@ -33,14 +33,18 @@ function FormTema() {
     // que será atualizado no form
     async function buscarTemaPorId() {
         try {
+            setIsLoading(true)
+
             await buscar(`/temas/${id}`, setTema, {
-                headers: { Authorization: token }
-            });
+                headers: { Authorization: token },
+            })
 
         } catch (error: any) {
             if (error.toString().includes('401')) {
                 handleLogout()
             }
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -50,7 +54,7 @@ function FormTema() {
             ToastAlerta('Você precisa estar logado!', 'erro');
             navigate('/')
         }
-    }, [navigate, token])
+    }, [token])
 
     // Cria um useEffect para monitorar o id (rota)
     useEffect(() => {
@@ -153,7 +157,7 @@ function FormTema() {
                             name="descricao"
                             placeholder="Ex: Frontend, Backend, DevOps..."
                             value={tema.descricao}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                             className="border border-pink-400 rounded-lg px-2 py-2 
                                     bg-transparent text-pink-100 outline-none 
                                     focus:border-pink-500 focus:shadow-[0_0_10px_rgba(255,111,145,0.3)]"
@@ -168,7 +172,7 @@ function FormTema() {
                         )}
 
                         {tema.descricao?.length >= 5 && (
-                            <span className="text-green-400 text-xs">
+                            <span className="text-green-400 text-xs flex gap-2">
                                 <FaCheck size={16} /> {tema.descricao.length} caracteres
                             </span>
                         )}
