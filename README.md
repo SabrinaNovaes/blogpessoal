@@ -1,73 +1,157 @@
-# React + TypeScript + Vite
+# 📝 Blog Pessoal - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação Frontend do projeto **Blog Pessoal**, desenvolvida com **React**, **TypeScript** e **Vite**, responsável pela interface do usuário e integração com a API REST do sistema.
 
-Currently, two official plugins are available:
+O projeto permite uma experiência moderna, responsiva e intuitiva para gerenciamento de conteúdos do blog, consumindo os serviços disponibilizados pelo backend.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🚀 Tecnologias Utilizadas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19
+- TypeScript
+- Vite
+- React Router DOM
+- Axios
+- Tailwind CSS 4
+- Framer Motion
+- React Toastify
+- React Spinners
+- React Intl
+- React Icons
+- Phosphor Icons
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## ✨ Funcionalidades
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Interface moderna e responsiva
+- Consumo de API REST
+- Navegação entre páginas utilizando React Router
+- Comunicação com o backend através do Axios
+- Feedback visual para ações do usuário com Toastify
+- Componentes reutilizáveis
+- Animações utilizando Framer Motion
+- Internacionalização utilizando React Intl
+- Loading durante requisições
+- Organização em componentes reutilizáveis
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 📂 Estrutura do Projeto
+
+```
+src/
+│
+├── assets/
+├── components/
+├── contexts/
+├── models/
+├── pages/
+├── services/
+├── utils/
+├── App.tsx
+└── main.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+> A estrutura segue a separação por responsabilidade, facilitando manutenção, reutilização e escalabilidade.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## ⚙️ Instalação
+
+Clone o repositório
+
+```bash
+git clone https://github.com/SabrinaNovaes/blogpessoal.git
 ```
+
+Entre na pasta
+
+```bash
+cd blogpessoal
+```
+
+Instale as dependências
+
+```bash
+npm install
+```
+
+Execute o projeto
+
+```bash
+npm run dev
+```
+
+A aplicação ficará disponível em
+
+```
+http://localhost:5173
+```
+
+---
+
+## 📦 Build
+
+Para gerar a versão de produção
+
+```bash
+npm run build
+```
+
+Visualizar o build
+
+```bash
+npm run preview
+```
+
+---
+
+## 🔗 Integração
+
+Este projeto consome uma API REST responsável pelo gerenciamento dos dados da aplicação.
+
+As requisições HTTP são realizadas utilizando **Axios**, permitindo integração entre Frontend e Backend de forma desacoplada.
+
+---
+
+## 🎨 Recursos Utilizados
+
+- Componentização com React
+- Tipagem estática com TypeScript
+- Navegação SPA
+- Estilização com Tailwind CSS
+- Ícones com React Icons e Phosphor Icons
+- Notificações com React Toastify
+- Indicadores de carregamento
+- Animações com Framer Motion
+
+---
+
+## 📈 Boas Práticas
+
+- Código organizado em componentes
+- Separação entre páginas, serviços e modelos
+- Consumo de API centralizado
+- Componentes reutilizáveis
+- Estrutura escalável
+- Tipagem utilizando TypeScript
+
+---
+
+## 👩‍💻 Desenvolvedora
+
+**Sabrina Oliveira**
+
+GitHub:
+https://github.com/SabrinaNovaes
+
+LinkedIn:
+www.linkedin.com/in/sabrina-novaes-dev
+
+---
+
+## 📄 Licença
+
+Este projeto foi desenvolvido para fins de estudo e prática em desenvolvimento Full Stack.
