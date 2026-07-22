@@ -148,7 +148,7 @@ GitHub:
 https://github.com/SabrinaNovaes
 
 LinkedIn:
-www.linkedin.com/in/sabrina-novaes-dev
+www.linkedin.com/in/sabrina-novaes
 
 ---
 
